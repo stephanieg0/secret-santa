@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Item from '../src/components/item';
-import Items from '../src/components/items';
+import Item, {loader as itemLoader} from '../src/components/item';
+import Items, {loader, action} from '../src/components/items';
 import Root from './routes/root';
 import ErrorPage from './routes/error-page';
 import reportWebVitals from './reportWebVitals';
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -22,10 +21,13 @@ const router = createBrowserRouter([
     path: '/items',
     element: <Items/>,
     errorElement: <ErrorPage/>,
+    loader: loader,
+    action: action,
     children: [
       {
         path: '/items/:itemId',
         element: <Item/>,
+        loader: itemLoader,
       },
     ]
   }

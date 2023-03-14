@@ -1,35 +1,29 @@
-import {Outlet, Link} from 'react-router-dom';
-import {GetItems} from '../api/get-items-api'
+import {Outlet, Link, useLoaderData, Form} from 'react-router-dom';
+import {getItemsApi} from '../api/get-items-api'
+import {createItemApi} from '../api/create-item-api'
+
+export async function loader() {
+  const items = await getItemsApi();
+  return { items };
+}
+
+export async function action() {
+	// this creates the post action in the route
+  const itemResponse = await createItemApi();
+  return { itemResponse };
+}
 
 export default function Items() {
-	const items = GetItems();
+	const { items } = useLoaderData();
 
 	return (
 		<>
-			<div id="sidebar">
+			<div id='sidebar'>
 				<h1>Items</h1>
 				<div>
-					<form id="search-form" role="search">
-						<input
-							id="q"
-							aria-label="Search items"
-							placeholder="Search"
-							type="search"
-							name="q"
-						/>
-						<div
-							id="search-spinner"
-							aria-hidden
-							hidden={true}
-						/>
-						<div
-							className="sr-only"
-							aria-live="polite"
-						></div>
-					</form>
-					<form method="post">
-						<button type="submit">Add new Item</button>
-					</form>
+					<Form method='post'>
+						<button type='submit'>Add new Item</button>
+					</Form>
 				</div>
 				<nav>
 					<ul>
@@ -41,7 +35,7 @@ export default function Items() {
 					</ul>
 				</nav>
 			</div>
-			<div id="detail"><Outlet /></div>
+			<div id='detail'><Outlet /></div>
 		</>
 	);
 }

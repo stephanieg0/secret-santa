@@ -1,12 +1,13 @@
-import {Form} from 'react-router-dom';
+import {Form, useLoaderData} from 'react-router-dom';
+import {getItemApi} from '../api/get-item-api'
+
+export async function loader({params}) {
+  const item = await getItemApi(params);
+  return { item };
+}
 
 export default function Item(){
-	const item = {
-		id: 1,
-		name: 'Nintendo Switch',
-		url: 'https://www.amazon.com/Nintendo-Switch-Lite-Coral/dp/B084Y3VVNG/ref=sr_1_7?keywords=nintendo+switch&qid=1678812713&sprefix=ninten%2Caps%2C152&sr=8-7',
-		notes: 'Love the pink'
-	};
+	const {item} = useLoaderData()
 
   return (
 		<>
