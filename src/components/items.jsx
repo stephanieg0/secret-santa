@@ -1,4 +1,4 @@
-import {Outlet, Link, useLoaderData, Form} from 'react-router-dom';
+import {Outlet, Link, useLoaderData, Form, redirect} from 'react-router-dom';
 import {getItemsApi} from '../api/get-items-api'
 import {createItemApi} from '../api/create-item-api'
 
@@ -7,10 +7,12 @@ export async function loader() {
   return { items };
 }
 
-export async function action() {
-	// this creates the post action in the route
-  const itemResponse = await createItemApi();
-  return { itemResponse };
+// this creates the post action in the route
+export async function action({request, params}) {	
+	const formData = await request.formData();
+	const updates = Object.fromEntries(formData);
+  const item = await createItemApi(updates, params);
+  return {item}
 }
 
 export default function Items() {
@@ -22,6 +24,29 @@ export default function Items() {
 				<h1>Items</h1>
 				<div>
 					<Form method='post'>
+						<div>
+							<label >Item Name</label>
+							<input
+								aria-label='name'
+								type='text'
+								name='itemName'
+							/>
+						</div>
+						<div>
+							<label >Item URL</label>
+							<input
+								aria-label='url'
+								type='text'
+								name='itemUrl'
+							/>
+						</div>
+						<div>
+							<label >Item Notes</label>
+							<textarea
+								name='itemNotes'
+								rows={6}
+							/>
+						</div>
 						<button type='submit'>Add new Item</button>
 					</Form>
 				</div>

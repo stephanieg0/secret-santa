@@ -3,7 +3,7 @@ import {getItemApi} from '../api/get-item-api'
 
 export async function loader({params}) {
   const item = await getItemApi(params);
-  return { item };
+  return {item};
 }
 
 export default function Item(){
