@@ -28,9 +28,6 @@ export default function Item(){
 				<Form
 					method='post'
 					action='destroy'
-					onSubmit={(event) => {
-					event.preventDefault();
-					}}
 				>
 					<button type='submit'>Delete</button>
 				</Form>

@@ -4,6 +4,7 @@ import './index.css';
 import Item, {loader as itemLoader} from '../src/components/item';
 import Items, {loader, action} from '../src/components/items';
 import EditItem, {action as actionEdit} from './components/edit-item';
+import {action as actionDestroy} from './components/delete-item';
 import Root from './routes/root';
 import ErrorPage from './routes/error-page';
 import reportWebVitals from './reportWebVitals';
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
         element: <EditItem/>,
         loader: itemLoader,
         action: actionEdit
+      },
+			{
+        path: '/items/:itemId/destroy',
+        loader: itemLoader,
+				action: actionDestroy
       }
     ]
   }
