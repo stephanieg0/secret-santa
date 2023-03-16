@@ -1,22 +1,13 @@
-import {Outlet, Link, useLoaderData, Form, redirect} from 'react-router-dom';
+import {Outlet, Link, useLoaderData, Form} from 'react-router-dom';
 import {getItemsApi} from '../api/get-items-api'
-import {createItemApi} from '../api/create-item-api'
 
 export async function loader() {
   const items = await getItemsApi();
-  return { items };
-}
-
-// this creates the post action in the route
-export async function action({request, params}) {	
-	const formData = await request.formData();
-	const updates = Object.fromEntries(formData);
-  const item = await createItemApi(updates, params);
-  return {item}
+  return {items};
 }
 
 export default function Items() {
-	const { items } = useLoaderData();
+	const {items} = useLoaderData();
 
 	return (
 		<>
@@ -60,6 +51,7 @@ export default function Items() {
 					</ul>
 				</nav>
 			</div>
+			{/* This is to render the children routes */}
 			<div id='detail'><Outlet /></div>
 		</>
 	);

@@ -1,12 +1,4 @@
-import {Form, useLoaderData, redirect} from 'react-router-dom'
-import {updateItemApi} from '../api/update-item-api'
-
-export async function action({request, params}){
-	const formData = await request.formData();
-	const updates = Object.fromEntries(formData);
-	await updateItemApi(updates, params)
-	return redirect(`/items/${params.itemId}`);
-}
+import {Form, useLoaderData} from 'react-router-dom'
 
 export default function EditItem(){
 	const {item} = useLoaderData();
