@@ -1,5 +1,6 @@
 import {Form, useLoaderData} from 'react-router-dom';
-import {getItemApi} from '../api/get-item-api'
+import {Box, Heading, Text, Button, Link} from '@primer/react';
+import {getItemApi} from '../api/get-item-api';
 
 export async function loader({params}) {
   const item = await getItemApi(params);
@@ -11,27 +12,27 @@ export default function Item(){
 
   return (
 		<>
-			<div id={`item-${item.id}`}>
-				<h1>{item.name}</h1>
+			<Box id={`item-${item.id}`}>
+				<Heading className='titles'>{item.name}</Heading>
 				<p>
-					<a target='_blank' href={item.url}>
+					<Link target='_blank' href={item.url}>
 						{item.url}
-					</a>
+					</Link>
 				</p>
-				<p>{item.notes}</p>
-			</div>
+				<Text>{item.notes}</Text>
+			</Box>
 			
-			<div id={`item-form-${item.id}`}>
+			<Box className='form-buttons'>
 				<Form action='edit'>
-					<button type='submit'>Edit</button>
+					<Button type='submit'>Edit</Button>
 				</Form>
 				<Form
 					method='post'
 					action='destroy'
 				>
-					<button type='submit'>Delete</button>
+					<Button type='submit'>Delete</Button>
 				</Form>
-			</div>
+			</Box>
 		</>
 	)
 }

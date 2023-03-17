@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
+import {ThemeProvider, BaseStyles} from '@primer/react';
 
 // components
 import App from './App';
@@ -14,7 +15,7 @@ import Item, {loader as itemLoader} from '../src/components/item';
 import EditItem from './components/edit-item';
 
 // routes
-import {create, edit, destroy} from './routes/item-routes'
+import {create, edit, destroy} from './routes/item-routes';
 import ErrorPage from './routes/error-page';
 
 const router = createBrowserRouter([
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+		<ThemeProvider>
+			<BaseStyles>
+    		<RouterProvider router={router} />
+			</BaseStyles>
+		</ThemeProvider>
   </React.StrictMode>
 );
 

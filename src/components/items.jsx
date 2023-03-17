@@ -1,4 +1,5 @@
 import {Outlet, Link, useLoaderData, Form} from 'react-router-dom';
+import {Box, Heading, TextInput, Text, Textarea, Button, ActionList} from '@primer/react'
 import {getItemsApi} from '../api/get-items-api'
 
 export async function loader() {
@@ -11,48 +12,34 @@ export default function Items() {
 
 	return (
 		<>
-			<div id='sidebar'>
-				<h1>Items</h1>
-				<div>
-					<Form method='post'>
-						<div>
-							<label >Item Name</label>
-							<input
-								aria-label='name'
-								type='text'
-								name='itemName'
-							/>
-						</div>
-						<div>
-							<label >Item URL</label>
-							<input
-								aria-label='url'
-								type='text'
-								name='itemUrl'
-							/>
-						</div>
-						<div>
-							<label >Item Notes</label>
-							<textarea
+			<Box id='container'>
+				<Box id='sidebar'>
+					<Heading className='titles'>Items</Heading>
+					<div>
+						<Form method='post'>
+							<Text display="block">Add a new Item</Text>
+							<TextInput aria-label="name" name="itemName" placeholder="Name" block className='mb-1'/>
+							<TextInput aria-label="url" name="itemUrl" placeholder="URL" block className='mb-1'/>
+							<Textarea
 								name='itemNotes'
-								rows={6}
+								rows={3}
+								aria-label='notes'
+								placeholder='Notes'
 							/>
-						</div>
-						<button type='submit'>Add new Item</button>
-					</Form>
-				</div>
-				<nav>
-					<ul>
-					{items.map((item) => (
-						<li key={item.id}>
-							<Link to={`/items/${item.id}`}>{item.name}</Link>
-						</li>
+							<Button type='submit'>Add Item</Button>
+						</Form>
+					</div>
+					<ActionList>
+						{items.map((item) => (
+							<ActionList.Item key={item.id}>
+								<Link to={`/items/${item.id}`}>{item.name}</Link>
+							</ActionList.Item>
 						))}
-					</ul>
-				</nav>
-			</div>
-			{/* This is to render the children routes */}
-			<div id='detail'><Outlet /></div>
+					</ActionList>
+				</Box>
+				{/* This is to render the children routes */}
+				<div id='detail'><Outlet /></div>
+			</Box>
 		</>
 	);
 }

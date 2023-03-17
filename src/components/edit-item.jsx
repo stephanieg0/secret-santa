@@ -1,45 +1,29 @@
-import {Form, useLoaderData} from 'react-router-dom'
+import {Form, useLoaderData} from 'react-router-dom';
+import {Box, Heading, TextInput, Textarea, Button, Link} from '@primer/react';
 
 export default function EditItem(){
 	const {item} = useLoaderData();
 
 	return (
 		<>
-			<div id='new-item'>
+			<Box id='new-item'>
 				<Form method='post'>
-					<h2>Edit Item</h2>
-					<div>
-						<label >Item Name</label>
-						<input
-							aria-label='name'
-							type='text'
-							name='itemName'
-							defaultValue={item.name}
-						/>
-					</div>
-					<div>
-						<label >Item URL</label>
-						<input
-							aria-label='url'
-							type='text'
-							name='itemUrl'
-							defaultValue={item.url}
-						/>
-					</div>
-					<div>
-						<label >Item Notes</label>
-						<textarea
-							name='itemNotes'
-							defaultValue={item.notes}
-							rows={6}
-						/>
-					</div>
-					<p>
-						<button type='submit'>Save</button>
-						<button type='button'>Cancel</button>
-					</p>
+					<Heading className='titles'>Edit Item</Heading>
+					<TextInput aria-label="name" name="itemName" placeholder="Name" block className='mb-1'defaultValue={item.name}/>
+					<TextInput aria-label="url" name="itemUrl" placeholder="URL" block className='mb-1' defaultValue={item.url}/>
+					<Textarea
+						name='itemNotes'
+						rows={3}
+						aria-label='notes'
+						placeholder='Notes'
+						defaultValue={item.notes}
+					/>
+					<Box className='form-buttons'>
+						<Button type='submit'>Save</Button>
+						<Button type='button'>Cancel</Button>
+					</Box>
 				</Form>
-			</div>
+			</Box>
 		</>
 	)
 }
