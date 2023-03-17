@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from 'react-router-dom';
 import {ThemeProvider, BaseStyles} from '@primer/react';
@@ -18,7 +18,7 @@ import EditItem from './components/edit-item';
 import {create, edit, destroy} from './routes/item-routes';
 import ErrorPage from './routes/error-page';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App/>,

@@ -31,7 +31,7 @@ export default function Items() {
 					</div>
 					<ActionList selectionVariant='single'>
 						{items.map((item) => (
-							<ActionList.LinkItem as={ReactRouterLink} to={`/items/${item.id}`}  key={item.id} active={window.location.pathname === `/items/${item.id}`}>
+							<ActionList.LinkItem as={ReactRouterLink} to={`/items/${item.id}`}  key={item.id} active={window.location.hash === `#/items/${item.id}`}>
 								{item.name}
 							</ActionList.LinkItem>
 						))}
