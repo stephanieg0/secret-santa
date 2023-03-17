@@ -1,5 +1,5 @@
-import {Form, useLoaderData} from 'react-router-dom';
-import {Box, Heading, TextInput, Textarea, Button, Link} from '@primer/react';
+import {Form, useLoaderData, Link} from 'react-router-dom';
+import {Box, Heading, TextInput, Textarea, Button} from '@primer/react';
 
 export default function EditItem(){
 	const {item} = useLoaderData();
@@ -9,8 +9,8 @@ export default function EditItem(){
 			<Box id='new-item'>
 				<Form method='post'>
 					<Heading className='titles'>Edit Item</Heading>
-					<TextInput aria-label="name" name="itemName" placeholder="Name" block className='mb-1'defaultValue={item.name}/>
-					<TextInput aria-label="url" name="itemUrl" placeholder="URL" block className='mb-1' defaultValue={item.url}/>
+					<TextInput aria-label='name' name='itemName' placeholder='Name' block className='mb-1'defaultValue={item.name}/>
+					<TextInput aria-label='url' name='itemUrl' placeholder='URL' block className='mb-1' defaultValue={item.url}/>
 					<Textarea
 						name='itemNotes'
 						rows={3}
@@ -20,7 +20,9 @@ export default function EditItem(){
 					/>
 					<Box className='form-buttons'>
 						<Button type='submit'>Save</Button>
-						<Button type='button'>Cancel</Button>
+						<Link to={`/items/${item.id}`}>
+							<Button type='button'>Cancel</Button>
+						</Link>
 					</Box>
 				</Form>
 			</Box>
